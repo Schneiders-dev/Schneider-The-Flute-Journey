@@ -8,7 +8,7 @@ import {
   pillars, problems, principles, routines, ROUTINE_LABELS, musicSteps, tools, teacherPoints,
   philosophy, quiz, quizResults, goals, checklist,
 } from '../data/practice.mjs';
-import { esc, kf, icon, list, portrait } from './helpers.mjs';
+import { esc, kf, icon, list, photo } from './helpers.mjs';
 import {
   fluteSVG, staffSVG, ribbonHTML, stopHTML, methodCard, repCard, problemBody, pillarBody, softCTA, sourcesHTML,
 } from './components.mjs';
@@ -117,11 +117,13 @@ const map = () => `
 
 /* ───────────── CAPÍTULOS ───────────── */
 const tones = { 'primeiros-passos': 'dawn', fundamentos: 'deep', tecnica: 'ink', musical: 'dusk' };
+const chapterPhotos = { 'primeiros-passos': 3, fundamentos: 1, tecnica: 16, musical: 8 };
 
 const chapter = (c) => `
 <section id="${c.id}" class="chapter" data-chapter="${c.id}" data-tone="${tones[c.id]}" aria-labelledby="${c.id}-title">
-  <div class="scene chapter__intro" data-scene style="--h:190">
+  <div class="scene chapter__intro has-photo" data-scene style="--h:190">
     <div class="stage">
+      <figure class="chapter__photo"${kf('0 o:.85 y:6 s:1.06; .45 o:1 y:0 s:1; .82 o:1 s:1; 1 o:0 y:-4 s:.96', '0 o:.3 s:1.12; .5 o:.34 s:1.04; .85 o:.3; 1 o:0 s:1')}>${photo(chapterPhotos[c.id], { sizes: '(min-width: 900px) 32vw, 100vw' })}</figure>
       <span class="chapter__num" aria-hidden="true"${kf('0 o:.35 s:1.35 b:6; .4 o:1 s:1 b:0; .8 o:1 s:.96; 1 o:0 s:.9 y:-6', '0 o:.35 s:1.25; .4 o:1 s:1; 1 o:0 y:-6')}>${c.number}</span>
       <div class="chapter__introtext"${kf('0 o:1 x:0 s:1 b:0; .8 o:1 x:0 s:1 b:0; 1 o:0 x:-8 s:.94 b:6', '0 o:1 y:0; .82 o:1 y:0; 1 o:0 y:-8')}>
         <p class="eyebrow">Capítulo ${c.number} · ${esc(c.kicker)}</p>
@@ -160,6 +162,7 @@ const chapter = (c) => `
 </section>`;
 
 /* ───────────── HORIZONTE ───────────── */
+const horizonPhotos = [13, 9, 10, 18];
 const horizonSection = () => `
 <section id="horizonte" class="chapter" data-chapter="horizonte" data-tone="ink" aria-labelledby="horizonte-title">
   <div class="scene hs" data-scene data-hook="hscroll">
@@ -174,6 +177,7 @@ const horizonSection = () => `
           ${horizon
             .map(
               (h, i) => `<article class="hpanel" id="h-${h.id}">
+              <figure class="hpanel__photo">${photo(horizonPhotos[i], { sizes: '(min-width: 700px) 520px, 84vw' })}</figure>
               <span class="hpanel__n">${pad(14 + i)}</span>
               <h3 class="display">${esc(h.title)}</h3>
               <p>${esc(h.text)}</p>
@@ -307,6 +311,10 @@ const studySection = () => `
     <p class="eyebrow">Como estudar</p>
     <h2 id="estudar-title" class="display">Estudar mais não significa<br><em>necessariamente estudar melhor.</em></h2>
   </header>
+  <div class="duo container">
+    <figure data-view="parallax" data-speed="-0.05">${photo(4, { sizes: '(min-width: 700px) 45vw, 92vw' })}<figcaption>Partitura, estante e flauta: o estudo começa na organização.</figcaption></figure>
+    <figure data-view="parallax" data-speed="0.05">${photo(7, { sizes: '(min-width: 700px) 45vw, 92vw' })}<figcaption>A sala de ensaio é onde o plano vira hábito.</figcaption></figure>
+  </div>
   <ol class="principles container">
     ${principles.map((p, i) => `<li class="principle" data-view="rise"><span>${pad(i + 1)}</span><h3>${esc(p.title)}</h3><p>${esc(p.text)}</p></li>`).join('')}
   </ol>
@@ -398,10 +406,13 @@ const teacherSection = () => `
 /* ───────────── NÍVEL ───────────── */
 const levelSection = () => `
 <section id="nivel" class="chapter" data-chapter="nivel" data-tone="dawn" aria-labelledby="nivel-title">
-  <header class="section-head container" data-view="rise">
-    <p class="eyebrow">Descubra seu nível</p>
-    <h2 id="nivel-title" class="display">Descubra onde você está.</h2>
-    <p class="lead">Oito perguntas rápidas. O resultado é uma orientação para encontrar seu ponto no mapa — não um diagnóstico absoluto.</p>
+  <header class="section-head section-head--photo container">
+    <div data-view="rise">
+      <p class="eyebrow">Descubra seu nível</p>
+      <h2 id="nivel-title" class="display">Descubra onde você está.</h2>
+      <p class="lead">Oito perguntas rápidas. O resultado é uma orientação para encontrar seu ponto no mapa — não um diagnóstico absoluto.</p>
+    </div>
+    <figure class="head-photo" data-view="parallax" data-speed="-0.06">${photo(14, { sizes: '(min-width: 900px) 26vw, 60vw' })}</figure>
   </header>
   <div class="container">
     <div class="quiz" data-quiz aria-live="polite">
@@ -477,6 +488,7 @@ const seminarSection = () => `
     ${seminars
       .map(
         (s) => `<article class="seminar__card" data-view="rise">
+        <figure class="seminar__photo">${photo(12, { sizes: '(min-width: 900px) 30vw, 92vw' })}</figure>
         <header><h3>${esc(s.title)}</h3>${s.date ? `<p class="seminar__date">${esc(s.date)}</p>` : ''}<p>${esc(s.description)}</p></header>
         <ul class="materials">
           ${s.materials
@@ -498,7 +510,7 @@ const seminarSection = () => `
 const aboutSection = () => `
 <section id="schneider" class="chapter about" data-chapter="schneider" data-tone="deep" aria-labelledby="schneider-title">
   <div class="container about__grid">
-    <div class="about__media" data-view="parallax" data-speed="-0.05">${portraitTeacher()}</div>
+    <div class="about__media" data-view="parallax" data-speed="-0.05"><figure class="portrait">${photo(2, { sizes: '(min-width: 860px) 440px, 92vw', alt: `${teacher.name} tocando flauta transversal` })}</figure></div>
     <div data-view="rise">
       <p class="eyebrow">Conheça Schneider</p>
       <h2 id="schneider-title" class="display">${esc(teacher.name)}</h2>
@@ -510,6 +522,9 @@ const aboutSection = () => `
     </div>
   </div>
   <div class="container">
+    <ul class="moments" aria-label="Momentos da jornada">
+      ${[[15, 'No palco'], [9, 'Na orquestra'], [6, 'Na sala de estudo'], [17, 'No dia a dia']].map(([n, c]) => `<li data-view="rise"><figure>${photo(n, { sizes: '(min-width: 900px) 24vw, 46vw' })}<figcaption>${c}</figcaption></figure></li>`).join('')}
+    </ul>
     <h3 class="display about__h">Metodologia</h3>
     <ol class="method-steps">
       ${teacher.methodology.map((m, i) => `<li data-view="rise"><span>${pad(i + 1)}</span><h4>${esc(m.title)}</h4><p>${esc(m.text)}</p></li>`).join('')}
@@ -517,15 +532,13 @@ const aboutSection = () => `
   </div>
 </section>`;
 
-function portraitTeacher() {
-  return portrait('../schneider', teacher.name).replace('portrait--mono', 'portrait--mono portrait--teacher');
-}
 
 /* ───────────── FILOSOFIA ───────────── */
 const finale = ['Descubra onde você está.', 'Entenda o que veio antes.', 'Conheça quem construiu essa tradição.', 'Descubra o que precisa desenvolver.', 'Escolha seu próximo passo.', 'Continue caminhando.'];
 const philosophySection = () => `
 <section id="filosofia" class="scene seq seq--philo" data-scene data-chapter="filosofia" data-tone="night" style="--h:${philosophy.length * 70 + 120}" aria-labelledby="filosofia-title">
   <div class="stage">
+    <div class="seq__bg" aria-hidden="true"${kf('0 o:0 s:1.15; .15 o:.32 s:1.1; .85 o:.32 s:1; 1 o:.2 s:1')}>${photo(11, { sizes: '100vw', alt: '' })}</div>
     <h2 id="filosofia-title" class="eyebrow eyebrow--center seq__eyebrow">Filosofia</h2>
     <div class="seq__lines">
       ${philosophy.map((l, i) => `<p class="seq__line display${i === philosophy.length - 1 ? ' seq__line--gold' : ''}"${kf(seqKf(i, philosophy.length + 1, { holdLast: false, end: 0.82 }))}>${esc(l)}</p>`).join('')}
@@ -547,6 +560,7 @@ const lessonsSection = () => `
     ${lessons.formats.map((f) => `<li data-view="rise"><h3>${esc(f.title)}</h3><p>${esc(f.text)}</p></li>`).join('')}
   </ul>
   <div class="container contact" data-view="rise">
+    <figure class="contact__photo">${photo(5, { sizes: '(min-width: 900px) 34vw, 92vw' })}<figcaption>Cada aula parte de onde você está.</figcaption></figure>
     <form class="contact__form" data-contact novalidate>
       <h3 class="display">Quero começar minha jornada</h3>
       <p class="contact__note">${esc(lessons.note)}${contact.city ? ` ${esc(contact.city)}.` : ''}</p>

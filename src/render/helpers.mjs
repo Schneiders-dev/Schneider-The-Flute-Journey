@@ -76,3 +76,11 @@ export const icons = {
 
 export const icon = (name, cls = 'icon') =>
   `<svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${icons[name] || ''}</svg>`;
+
+// Foto otimizada (WebP 640/1080) com carregamento preguiçoso.
+import { photos as PHOTOS } from '../data/photos.mjs';
+export function photo(n, { cls = '', sizes = '(min-width: 900px) 40vw, 100vw', prefix = '', eager = false, alt } = {}) {
+  const p = PHOTOS[n];
+  const src = (w) => `${prefix}assets/img/fotos/foto-${n}-${w}.webp`;
+  return `<img class="${cls}" src="${src(1080)}" srcset="${src(640)} 640w, ${src(1080)} 1080w" sizes="${sizes}" alt="${(alt ?? p.alt).replace(/"/g, '&quot;')}" style="object-position:${p.pos}" ${eager ? '' : 'loading="lazy" '}decoding="async">`;
+}

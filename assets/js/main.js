@@ -92,10 +92,13 @@
   function setupH(s) {
     s.track = s.el.querySelector('[data-track]');
     s.viewport = s.el.querySelector('.hs__viewport');
-    const unpin = vh < 440 || vw < 340;
-    s.el.classList.toggle('is-unpinned', unpin);
+    s.el.classList.remove('is-unpinned');
     s.el.style.height = '';
     s.track.style.transform = '';
+    // Se os painéis não cabem na tela fixa, vira rolagem horizontal nativa (swipe), sem cortar conteúdo.
+    const room = s.stage.clientHeight - s.viewport.offsetTop - 24;
+    const unpin = vh < 440 || vw < 340 || s.track.offsetHeight > room;
+    s.el.classList.toggle('is-unpinned', unpin);
     if (unpin) { s.dist = 0; return; }
     s.dist = Math.max(0, s.track.scrollWidth - s.viewport.clientWidth);
     s.el.style.height = Math.round(s.dist / 0.82 + vh) + 'px';
