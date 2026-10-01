@@ -631,7 +631,7 @@
       const name = form.nome.value.trim();
       form.nome.setAttribute('aria-invalid', String(!name));
       if (!name) { status.textContent = 'Conte seu nome para começarmos.'; form.nome.focus(); return; }
-      const msg = `Olá, Schneider! Meu nome é ${name}.\nOnde estou na jornada: ${form.nivel.value}\nObjetivo: ${form.objetivo.value}${form.mensagem.value.trim() ? `\n\n${form.mensagem.value.trim()}` : ''}\n\n(Enviado pelo site The Flute Journey)`;
+      const msg = `Olá, Natan! Meu nome é ${name}.\nOnde estou na jornada: ${form.nivel.value}\nObjetivo: ${form.objetivo.value}${form.mensagem.value.trim() ? `\n\n${form.mensagem.value.trim()}` : ''}\n\n(Enviado pelo site The Flute Journey)`;
       if (channel === 'whatsapp' && c.whatsapp) {
         window.open(`https://wa.me/${c.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
       } else if (c.email) {

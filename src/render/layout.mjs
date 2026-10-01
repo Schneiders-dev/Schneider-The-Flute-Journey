@@ -112,7 +112,8 @@ export function hereBar() {
 export function footer(prefix = '') {
   const H = prefix ? prefix + 'index.html' : '';
   const socials = [
-    contact.instagram && `<a href="${contact.instagram}" target="_blank" rel="noopener">Instagram</a>`,
+    contact.whatsapp && `<a href="https://wa.me/${contact.whatsapp}" target="_blank" rel="noopener">WhatsApp</a>`,
+    contact.instagram && `<a href="${contact.instagram}" target="_blank" rel="noopener">Instagram @schneiderflautist</a>`,
     contact.youtube && `<a href="${contact.youtube}" target="_blank" rel="noopener">YouTube</a>`,
     contact.email && `<a href="mailto:${contact.email}">${esc(contact.email)}</a>`,
   ].filter(Boolean);

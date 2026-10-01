@@ -30,9 +30,9 @@ export const site = {
 // Contato — preencha para ativar os botões de WhatsApp / e-mail.
 // whatsapp: apenas números com DDI e DDD, ex.: '5511999999999'
 export const contact = {
-  whatsapp: '',
+  whatsapp: '5527997110720',
   email: '',
-  instagram: '', // ex.: 'https://instagram.com/seu_perfil'
+  instagram: 'https://www.instagram.com/schneiderflautist',
   youtube: '',
   city: '', // ex.: 'São Paulo — SP · aulas presenciais e online'
 };
@@ -41,8 +41,8 @@ export const contact = {
 // IMPORTANTE: os itens com placeholder: true precisam ser escritos pelo próprio professor.
 // O site não inventa biografia, formação ou experiência.
 export const teacher = {
-  name: 'Schneider',
-  role: 'Flautista e professor de flauta transversal',
+  name: 'Natan Schneider',
+  role: 'Professor e idealizador de The Flute Journey',
   photo: 'assets/img/schneider.jpg', // opcional; se não existir, aparece um monograma
   intro:
     'Esta jornada foi organizada para que cada estudante entenda onde está, o que já construiu e qual é o próximo passo — com fundamento, clareza e música.',
