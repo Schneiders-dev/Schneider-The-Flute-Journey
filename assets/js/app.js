@@ -136,6 +136,7 @@
       sessionStorage.removeItem('tfj-placement');
       track('signup');
       dlgAcc.close();
+      if (r.admin) { toast('Conta de administrador criada!'); location.href = '/admin'; return; }
       if (r.placed) { location.href = '/#s-' + boot.stations[r.current].id; location.reload(); }
       else { await loadMe(); openPlacement(true); }
     } catch (err) { msg.textContent = err.message; } finally { btn.disabled = false; }

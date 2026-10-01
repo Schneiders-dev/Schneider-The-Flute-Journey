@@ -45,13 +45,27 @@ function currentUser(req) {
 }
 
 // Administrador criado/atualizado a partir das variáveis de ambiente.
+// Lê variáveis tolerando espaços e aspas coladas por engano no painel da hospedagem.
+const envClean = (k) => String(process.env[k] || '').trim().replace(/^["']|["']$/g, '').trim();
+const ADMIN_EMAIL = envClean('ADMIN_EMAIL').toLowerCase();
+const ADMIN_PASSWORD = envClean('ADMIN_PASSWORD');
+const isAdminEmail = (email) => !!ADMIN_EMAIL && email === ADMIN_EMAIL;
+
+// Administrador: o e-mail de ADMIN_EMAIL é sempre administrador.
+// - Se ADMIN_PASSWORD estiver definida, a conta é criada/atualizada com essa senha.
+// - Sem ADMIN_PASSWORD, basta criar a conta pelo site com esse e-mail (a senha é a escolhida no cadastro).
 function ensureAdmin() {
-  const email = (process.env.ADMIN_EMAIL || '').trim().toLowerCase();
-  const pw = process.env.ADMIN_PASSWORD || '';
-  if (!email || pw.length < 8) { console.warn('⚠ Defina ADMIN_EMAIL e ADMIN_PASSWORD (mín. 8 caracteres) para ativar o administrador.'); return; }
-  const u = db.prepare('SELECT * FROM users WHERE email = ?').get(email);
-  if (!u) db.prepare("INSERT INTO users (name, email, pass_hash, role, is_student, consent, created_at) VALUES ('Natan Schneider', ?, ?, 'admin', 1, 1, ?)").run(email, hashPassword(pw), now());
-  else if (u.role !== 'admin' || !checkPassword(pw, u.pass_hash)) db.prepare("UPDATE users SET role = 'admin', pass_hash = ? WHERE id = ?").run(hashPassword(pw), u.id);
+  if (!ADMIN_EMAIL) { console.warn('⚠ Administrador: defina a variável ADMIN_EMAIL com o seu e-mail.'); return; }
+  const u = db.prepare('SELECT * FROM users WHERE email = ?').get(ADMIN_EMAIL);
+  if (ADMIN_PASSWORD.length >= 8) {
+    if (!u) db.prepare("INSERT INTO users (name, email, pass_hash, role, is_student, consent, created_at) VALUES ('Natan Schneider', ?, ?, 'admin', 1, 1, ?)").run(ADMIN_EMAIL, hashPassword(ADMIN_PASSWORD), now());
+    else if (u.role !== 'admin' || !checkPassword(ADMIN_PASSWORD, u.pass_hash)) db.prepare("UPDATE users SET role = 'admin', is_student = 1, pass_hash = ? WHERE id = ?").run(hashPassword(ADMIN_PASSWORD), u.id);
+    console.log(`✓ Administrador: ${ADMIN_EMAIL} (senha definida em ADMIN_PASSWORD)`);
+  } else {
+    if (u && u.role !== 'admin') db.prepare("UPDATE users SET role = 'admin', is_student = 1 WHERE id = ?").run(u.id);
+    if (ADMIN_PASSWORD) console.warn('⚠ ADMIN_PASSWORD tem menos de 8 caracteres e foi ignorada.');
+    console.log(u ? `✓ Administrador: ${ADMIN_EMAIL}` : `✓ Administrador: crie a conta pelo site com o e-mail ${ADMIN_EMAIL} — ela vira administradora automaticamente.`);
+  }
 }
 
 /* ───────────── Utilidades HTTP ───────────── */
@@ -167,19 +181,20 @@ async function api(req, res, path, user) {
     if (password.length < 8 || password.length > 128) throw httpError(400, 'A senha precisa ter de 8 a 128 caracteres.');
     if (!b.consent) throw httpError(400, 'É preciso concordar com a política de privacidade.');
     if (db.prepare('SELECT 1 FROM users WHERE email = ?').get(email)) throw httpError(409, 'Já existe uma conta com este e-mail. Use “Entrar”.');
-    const r = db.prepare('INSERT INTO users (name, email, phone, pass_hash, consent, created_at, last_login_at, logins) VALUES (?, ?, ?, ?, 1, ?, ?, 1)').run(name, email, phone, hashPassword(password), now(), now());
+    const r = db.prepare('INSERT INTO users (name, email, phone, pass_hash, consent, created_at, last_login_at, logins, role, is_student) VALUES (?, ?, ?, ?, 1, ?, ?, 1, ?, ?)').run(name, email, phone, hashPassword(password), now(), now(), isAdminEmail(email) ? 'admin' : 'visitor', isAdminEmail(email) ? 1 : 0);
     const created = db.prepare('SELECT * FROM users WHERE id = ?').get(r.lastInsertRowid);
     createSession(res, req, created.id);
     logEvent(req, res, created.id, 'signup', '', 0);
     let placed = false; let current = 0;
     if (Array.isArray(b.placement) && b.placement.length) { current = applyPlacement(created, b.placement).current; placed = true; }
-    return json(res, 200, { ok: true, placed, current });
+    return json(res, 200, { ok: true, placed, current, admin: isAdminEmail(email) });
   }
   if (path === 'login' && method === 'POST') {
     rateLimit(req, 'login', 10, 15 * 60e3);
     const b = await readJSON(req);
     const u = db.prepare('SELECT * FROM users WHERE email = ?').get(String(b.email || '').trim().toLowerCase());
     if (!u || !checkPassword(String(b.password || ''), u.pass_hash)) throw httpError(401, 'E-mail ou senha incorretos.');
+    if (isAdminEmail(u.email) && u.role !== 'admin') db.prepare("UPDATE users SET role = 'admin', is_student = 1 WHERE id = ?").run(u.id);
     db.prepare('UPDATE users SET last_login_at = ?, logins = logins + 1 WHERE id = ?').run(now(), u.id);
     createSession(res, req, u.id);
     logEvent(req, res, u.id, 'login', '', 0);
