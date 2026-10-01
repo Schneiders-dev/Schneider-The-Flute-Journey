@@ -1,0 +1,341 @@
+// "Paradas históricas" da jornada.
+// Regra editorial: nenhuma citação atribuída, nenhuma informação inventada.
+// Dados biográficos seguem as referências listadas em `sources` (ver references.mjs).
+// Quando há incerteza ou divergência entre fontes, ela é registrada em `note`.
+//
+// Retratos: coloque a imagem em assets/img/pedagogos/<slug>.jpg (ver README da pasta).
+// Sem imagem, o site exibe um retrato tipográfico (monograma).
+
+export const ROLE_LABELS = {
+  pedagogo: 'Pedagogo',
+  interprete: 'Intérprete',
+  compositor: 'Compositor',
+  inventor: 'Inventor / construtor',
+  autor: 'Autor de método',
+  teorico: 'Autor de tratado',
+};
+
+export const pedagogues = [
+  {
+    slug: 'quantz',
+    name: 'Johann Joachim Quantz',
+    years: '1697 — 1773',
+    nationality: 'Alemão',
+    roles: ['interprete', 'compositor', 'teorico', 'inventor'],
+    tagline: 'O flautista que escreveu um dos grandes tratados do século XVIII.',
+    stop: 'historia',
+    bio:
+      'Flautista, compositor e construtor de flautas, Quantz serviu por décadas na corte de Frederico II da Prússia, de quem foi professor de flauta. Em 1752 publicou em Berlim o "Versuch einer Anweisung die Flöte traversiere zu spielen" ("Ensaio de um método para tocar a flauta transversal").',
+    importance:
+      'O tratado vai muito além da flauta: discute estilo, ornamentação, cadências, acompanhamento e o gosto musical da época. Hoje é uma das fontes mais consultadas sobre a prática da música barroca.',
+    work: {
+      title: 'Versuch einer Anweisung die Flöte traversiere zu spielen (1752)',
+      objective: 'Orientar o flautista — e o músico em geral — sobre técnica, estilo e interpretação no século XVIII.',
+      how: 'Leia como um documento histórico, por capítulos, sempre ligando o texto a uma obra que você esteja tocando (uma sonata de Händel, Telemann, Bach ou do próprio Quantz). Há traduções em várias línguas, incluindo a edição inglesa "On Playing the Flute".',
+      forWhom: 'Intermediário a avançado; essencial para quem se interessa por repertório barroco e práticas historicamente informadas.',
+      develops: 'Compreensão de estilo, ornamentação, articulação barroca, fraseado e senso histórico.',
+      mistakes: 'Tratar o texto como regra absoluta para todo repertório, ou ler sem tocar. O tratado descreve o gosto de uma época e de um lugar específicos.',
+    },
+    journey: 'Aparece quando você começa a perguntar "como esta música era tocada?". É a ponte entre técnica e estilo.',
+    legacy: 'Base de grande parte dos estudos modernos sobre interpretação barroca.',
+    note: 'Quantz é frequentemente citado como responsável pela adição de uma segunda chave à flauta barroca (distinguindo Ré♯ e Mi♭); a atribuição aparece em fontes históricas, mas detalhes variam entre autores.',
+    sources: ['quantz-reilly', 'powell', 'grove'],
+  },
+  {
+    slug: 'boehm',
+    name: 'Theobald Boehm',
+    years: '1794 — 1881',
+    nationality: 'Alemão (Munique)',
+    roles: ['inventor', 'interprete', 'compositor', 'autor'],
+    tagline: 'O inventor da flauta que tocamos hoje.',
+    stop: 'historia',
+    bio:
+      'Ourives de formação, flautista da orquestra da corte de Munique e compositor, Boehm dedicou décadas a repensar a acústica e a mecânica da flauta. Em 1832 apresentou uma flauta cônica com novo sistema de chaves em anel; em 1847, a flauta de tubo cilíndrico, com cabeça de perfil parabólico e orifícios grandes — a base do instrumento moderno.',
+    importance:
+      'Boehm colocou os orifícios onde a acústica pedia — e não onde os dedos alcançavam — e criou um mecanismo para fechá-los. O resultado foi um instrumento mais homogêneo, mais afinado e mais potente.',
+    work: {
+      title: 'Die Flöte und das Flötenspiel (1871) · 24 Caprices-Études op. 26',
+      objective: 'Explicar os princípios acústicos e mecânicos de sua flauta e orientar o estudo do instrumento; os Caprichos desenvolvem técnica e musicalidade em todas as tonalidades.',
+      how: 'O livro (traduzido para o inglês como "The Flute and Flute-Playing") pode ser lido por capítulos, especialmente os trechos sobre som e prática. Os Caprichos op. 26 são estudos avançados: trabalhe um por vez, devagar, com atenção ao som em todas as tonalidades.',
+      forWhom: 'Livro: qualquer nível curioso sobre o instrumento. Caprichos: avançado.',
+      develops: 'Compreensão do instrumento, técnica em todas as tonalidades, controle e fluência.',
+      mistakes: 'Ignorar a história do próprio instrumento; nos estudos, buscar velocidade antes do controle e do som.',
+    },
+    journey: 'Quando você monta sua flauta pela primeira vez, está segurando o trabalho de Boehm.',
+    legacy: 'Praticamente toda flauta transversal moderna é uma flauta do "sistema Boehm".',
+    note: 'É frequentemente relatado que Boehm foi influenciado por ouvir o flautista inglês Charles Nicholson, de som poderoso e orifícios grandes, em Londres (1831). O episódio é amplamente citado, mas o peso exato dessa influência é discutido por historiadores.',
+    sources: ['boehm-miller', 'powell', 'toff-flutebook', 'dcm'],
+  },
+  {
+    slug: 'altes',
+    name: 'Henri Altès',
+    years: '1826 — 1895',
+    nationality: 'Francês',
+    roles: ['pedagogo', 'interprete', 'autor'],
+    tagline: 'Um método completo da tradição do Conservatório de Paris.',
+    stop: 'fundamentos',
+    bio:
+      'Joseph-Henri Altès foi flautista da Ópera de Paris e professor de flauta no Conservatório de Paris, cargo em que foi sucedido por Paul Taffanel.',
+    importance:
+      'Seu método reúne explicações, exercícios e estudos progressivos dentro da tradição francesa do século XIX.',
+    work: {
+      title: 'Méthode de flûte (Méthode complète)',
+      objective: 'Conduzir o estudante desde os fundamentos até um nível técnico sólido, com exercícios progressivos e duos.',
+      how: 'Use como espinha dorsal de leitura e mecanismo em uma fase inicial e fundamental, combinando com exercícios de som. Os duos são ótimos para tocar com o professor.',
+      forWhom: 'Iniciante avançado a intermediário.',
+      develops: 'Leitura, digitação, articulação, regularidade rítmica.',
+      mistakes: 'Avançar páginas sem dominar as anteriores; tocar os exercícios sem atenção ao som.',
+    },
+    journey: 'Uma ponte entre os primeiros passos e os fundamentos.',
+    legacy: 'Faz parte da linhagem do Conservatório de Paris que leva a Taffanel.',
+    note: 'Datas e detalhes de edição variam entre editoras; há versões revisadas e traduzidas do método.',
+    sources: ['blakeman', 'toff-flutebook'],
+  },
+  {
+    slug: 'taffanel',
+    name: 'Paul Taffanel',
+    years: '1844 — 1908',
+    nationality: 'Francês',
+    roles: ['pedagogo', 'interprete', 'autor'],
+    tagline: 'Considerado o fundador da escola francesa moderna de flauta.',
+    stop: 'tecnica',
+    bio:
+      'Flautista, regente e professor, Taffanel foi solista da Ópera de Paris e da Société des Concerts du Conservatoire, e mais tarde regente de ambas. Em 1879 fundou a Société des instruments à vent, dedicada à música de câmara para sopros. A partir de 1893 foi professor de flauta do Conservatório de Paris.',
+    importance:
+      'Taffanel defendeu um som flexível e cantado e renovou o repertório e a pedagogia do instrumento. Dele descende uma linhagem de alunos que espalhou a escola francesa pelo mundo.',
+    work: {
+      title: 'Méthode complète de flûte (com Philippe Gaubert, publicada em 1923)',
+      objective: 'Sistematizar o mecanismo da flauta. Os "17 Grands exercices journaliers de mécanisme" trabalham escalas, arpejos, intervalos e cromatismos em todas as tonalidades.',
+      how: 'Escolha um ou dois exercícios por período (ex.: nº 1 e nº 4), toque devagar, com metrônomo, variando articulações. O objetivo é regularidade e som homogêneo — a velocidade vem depois.',
+      forWhom: 'Fundamental (exercícios iniciais, lentos) a profissional. Muitos flautistas usam os exercícios diários a vida toda.',
+      develops: 'Mecanismo, escalas, arpejos, uniformidade de dedos, resistência e conhecimento das tonalidades.',
+      mistakes: 'Tocar o exercício inteiro de uma vez, rápido e sem ouvir. Ou acreditar que mecanismo substitui o trabalho de som.',
+    },
+    journey: 'A parada obrigatória de quem entra na técnica: aqui os dedos aprendem a obedecer.',
+    legacy: 'Sua linhagem inclui Philippe Gaubert, Marcel Moyse e muitos dos principais flautistas do século XX.',
+    note: 'Taffanel morreu em 1908; o método foi completado e publicado por Philippe Gaubert. A contribuição exata de cada autor em cada parte não é sempre identificável.',
+    sources: ['blakeman', 'taffanel-gaubert', 'grove'],
+  },
+  {
+    slug: 'gaubert',
+    name: 'Philippe Gaubert',
+    years: '1879 — 1941',
+    nationality: 'Francês',
+    roles: ['interprete', 'compositor', 'pedagogo', 'autor'],
+    tagline: 'Aluno de Taffanel, completou o método do mestre.',
+    stop: 'tecnica',
+    bio:
+      'Flautista, regente e compositor, Gaubert foi aluno de Taffanel e tornou-se professor de flauta do Conservatório de Paris. Regeu a Société des Concerts du Conservatoire e a Ópera de Paris. Escreveu obras importantes para flauta, como a Fantaisie, a Nocturne et Allegro scherzando e sonatas.',
+    importance:
+      'Gaubert completou o método iniciado por Taffanel e é peça central da escola francesa como intérprete, professor e compositor.',
+    work: {
+      title: 'Méthode complète de flûte (Taffanel & Gaubert)',
+      objective: 'Ver Taffanel. Além do método, suas obras são repertório formativo para a sonoridade francesa.',
+      how: 'Estude os exercícios diários junto com uma obra de Gaubert (como a Madrigal ou a Fantaisie) para ligar o mecanismo ao estilo.',
+      forWhom: 'Intermediário a avançado.',
+      develops: 'Mecanismo, cor de som, estilo francês.',
+      mistakes: 'Separar técnica de música — exatamente o que Gaubert, compositor, não fazia.',
+    },
+    journey: 'Mostra que o método e a música vêm da mesma tradição.',
+    legacy: 'Professor de gerações de flautistas franceses; repertório presente em concursos e recitais.',
+    sources: ['blakeman', 'taffanel-gaubert', 'grove'],
+  },
+  {
+    slug: 'andersen',
+    name: 'Joachim Andersen',
+    years: '1847 — 1909',
+    nationality: 'Dinamarquês',
+    roles: ['interprete', 'compositor', 'autor'],
+    tagline: 'O autor dos estudos que acompanham o flautista por anos.',
+    stop: 'estudos',
+    bio:
+      'Flautista e regente dinamarquês, Andersen foi membro fundador da Orquestra Filarmônica de Berlim (1882), como primeiro flautista. Mais tarde voltou a Copenhague, onde atuou como regente.',
+    importance:
+      'Andersen escreveu diversas coleções de estudos que formam uma progressão natural, do intermediário ao avançado. São estudos musicais — com harmonia, forma e caráter —, não apenas exercícios.',
+    work: {
+      title: 'Estudos op. 41, op. 33, op. 30, op. 37, op. 63, op. 60 e op. 15',
+      objective: 'Desenvolver técnica dentro de um contexto musical: tonalidades, registros, articulações, resistência e fraseado.',
+      how: 'Uma progressão comum: op. 41 (18 Estudos) e op. 33 → op. 30 e op. 37 → op. 63 e op. 60 → op. 15 (24 Grandes Estudos). Estude por trechos, devagar, com metrônomo, e só depois toque o estudo inteiro como uma peça.',
+      forWhom: 'Intermediário a profissional (op. 15 e op. 60 são bastante exigentes).',
+      develops: 'Leitura, técnica em todas as tonalidades, resistência, controle de registros, fraseado.',
+      mistakes: 'Tocar sempre do início ao fim "para ver se sai"; ignorar dinâmicas e caráter; avançar para opus mais difíceis cedo demais.',
+    },
+    journey: 'Quando os estudos deixam de ser exercícios e passam a ser música.',
+    legacy: 'Seus estudos estão entre os mais usados em conservatórios e audições.',
+    note: 'A ordem de dificuldade entre os opus é uma sugestão pedagógica comum, não uma regra; professores divergem.',
+    sources: ['toff-flutebook', 'grove', 'imslp'],
+  },
+  {
+    slug: 'kohler',
+    name: 'Ernesto Köhler',
+    years: '1849 — 1907',
+    nationality: 'Italiano (atuou na Rússia)',
+    roles: ['interprete', 'compositor', 'autor'],
+    tagline: 'Estudos progressivos para construir a fluência.',
+    stop: 'estudos',
+    bio:
+      'Nascido em Módena, Köhler foi flautista e compositor e desenvolveu grande parte de sua carreira em São Petersburgo, como flautista da orquestra dos Teatros Imperiais.',
+    importance:
+      'Sua coleção "Progress in Flute Playing" op. 33, em três volumes, é uma das sequências de estudos mais usadas entre o nível fundamental e o intermediário.',
+    work: {
+      title: 'Progress in Flute Playing op. 33 (3 volumes)',
+      objective: 'Desenvolver gradualmente fluência técnica, leitura e articulação.',
+      how: 'Volume 1 para o fundamental; volumes 2 e 3 para o intermediário. Defina um andamento-alvo realista e suba o metrônomo aos poucos. Toque cada estudo com uma intenção musical clara.',
+      forWhom: 'Fundamental a intermediário.',
+      develops: 'Fluência, leitura, articulação, coordenação dedos-língua.',
+      mistakes: 'Tratar como exercício mecânico; tocar rápido com som pobre.',
+    },
+    journey: 'Uma das trilhas mais clássicas entre os fundamentos e os grandes estudos.',
+    legacy: 'Presente em programas de ensino do mundo todo.',
+    sources: ['toff-flutebook', 'imslp'],
+  },
+  {
+    slug: 'fleury',
+    name: 'Louis Fleury',
+    years: '1878 — 1926',
+    nationality: 'Francês',
+    roles: ['interprete'],
+    tagline: 'O flautista para quem Debussy escreveu Syrinx.',
+    stop: 'interpretacao',
+    bio:
+      'Flautista francês de grande atuação na música de câmara e na divulgação do repertório de sua época. Foi o intérprete para quem Debussy escreveu a peça para flauta solo que hoje conhecemos como "Syrinx" (1913), composta como música de cena para a peça "Psyché", de Gabriel Mourey.',
+    importance:
+      'Fleury mostra o papel do intérprete na criação do repertório: muitas obras nasceram da colaboração entre compositores e flautistas.',
+    work: {
+      title: 'Claude Debussy — Syrinx (1913)',
+      objective: 'Não é um método, e sim uma obra que é parada obrigatória na formação interpretativa: liberdade, cor, silêncio e narrativa em uma única linha melódica.',
+      how: 'Leia sobre o contexto (o mito de Pã e Siringe), observe cada indicação da partitura e grave versões diferentes. Trabalhe respiração e pausas como parte do discurso.',
+      forWhom: 'Intermediário a avançado.',
+      develops: 'Interpretação, timbre, controle de dinâmica, liberdade rítmica com fundamento.',
+      mistakes: 'Tocar "livre" sem estrutura; ignorar as indicações precisas de Debussy.',
+    },
+    journey: 'O momento em que o flautista descobre que uma única linha pode contar uma história inteira.',
+    legacy: 'Syrinx tornou-se uma das obras mais importantes do repertório para flauta solo.',
+    note: 'A obra foi publicada postumamente (1927) e o título "Syrinx" foi dado na edição; o título original em fontes da época era "Flûte de Pan". Detalhes do manuscrito e das edições são discutidos em estudos críticos.',
+    sources: ['toff-flutebook', 'grove'],
+  },
+  {
+    slug: 'moyse',
+    name: 'Marcel Moyse',
+    years: '1889 — 1984',
+    nationality: 'Francês',
+    roles: ['pedagogo', 'interprete', 'autor'],
+    tagline: 'Um dos grandes nomes da pedagogia da flauta.',
+    stop: 'som',
+    bio:
+      'Nascido em Saint-Amour (Jura), Moyse estudou no Conservatório de Paris na tradição de Taffanel e foi, por décadas, um dos flautistas mais ativos da França — estreou, por exemplo, o Concerto de Jacques Ibert (1934). Foi professor do Conservatório de Paris e, mais tarde, nos Estados Unidos, esteve entre os fundadores do Marlboro Music, em Vermont.',
+    importance:
+      'Sua abordagem sobre sonoridade, fraseado e desenvolvimento musical influenciou gerações de flautistas. Moyse tratava o som como algo a ser construído nota a nota, e a música como a razão de todo o trabalho técnico.',
+    work: {
+      title: 'De la sonorité: art et technique (1934)',
+      objective: 'Desenvolvimento da sonoridade, controle, homogeneidade entre registros e expressão.',
+      how: 'Comece pelos exercícios de notas ligadas em semitons descendentes a partir do Si médio: uma nota "modelo" bem soada e a próxima imitando sua qualidade. Pouco tempo por dia, com atenção total. Use espelho, afinador ocasionalmente e, sobretudo, a escuta.',
+      forWhom: 'A partir do fundamental (com orientação) até o nível profissional.',
+      develops: 'Som, afinação, controle, flexibilidade de embocadura, homogeneidade, fraseado.',
+      mistakes: 'Estudar mecanicamente, "cumprindo" a página; forçar o som; tocar longo demais sem pausa; esquecer que o objetivo é expressivo.',
+    },
+    journey: 'Você já produz som. Moyse ensina a ouvi-lo — e a transformá-lo.',
+    legacy: 'Além de "De la sonorité", publicou "Tone Development Through Interpretation", "24 Petites études mélodiques", "Exercices journaliers" e muitas outras obras pedagógicas.',
+    note: 'As fontes divergem quanto aos detalhes de seus estudos no Conservatório (professores e datas); a biografia de referência é a de Ann McCutchan.',
+    sources: ['mccutchan', 'moyse-sonorite', 'toff-flutebook', 'grove'],
+  },
+  {
+    slug: 'rampal',
+    name: 'Jean-Pierre Rampal',
+    years: '1922 — 2000',
+    nationality: 'Francês (Marselha)',
+    roles: ['interprete', 'pedagogo'],
+    tagline: 'O flautista que levou o instrumento às grandes salas como solista.',
+    stop: 'performance',
+    bio:
+      'Rampal construiu uma carreira internacional de solista em uma época em que a flauta raramente ocupava esse lugar. Gravou extensamente, ajudou a redescobrir grande parte do repertório barroco e colaborou com compositores de seu tempo. Foi professor do Conservatório de Paris.',
+    importance:
+      'Rampal mudou a percepção pública da flauta como instrumento solista e ampliou enormemente o repertório gravado.',
+    work: {
+      title: 'Gravações e edições de repertório',
+      objective: 'Não é um método: sua contribuição pedagógica está nas gravações e nas edições que ajudaram a difundir o repertório.',
+      how: 'Ouça gravações de diferentes épocas da carreira de Rampal e compare com outros intérpretes na mesma obra. Ouvir com atenção é parte do estudo.',
+      forWhom: 'Todos os níveis, como ouvinte.',
+      develops: 'Referência auditiva, estilo, presença de palco.',
+      mistakes: 'Imitar um intérprete em vez de entender suas escolhas.',
+    },
+    journey: 'Aparece quando a jornada chega ao palco.',
+    legacy: 'Uma referência de comunicação com o público e de amor pelo repertório.',
+    sources: ['rampal', 'grove'],
+  },
+  {
+    slug: 'galway',
+    name: 'Sir James Galway',
+    years: 'Nascido em 1939',
+    nationality: 'Norte-irlandês (Belfast)',
+    roles: ['interprete', 'pedagogo', 'autor'],
+    tagline: 'Da orquestra ao mundo: a flauta para grandes públicos.',
+    stop: 'performance',
+    bio:
+      'Galway foi primeiro flautista da Filarmônica de Berlim (1969–1975) antes de seguir carreira solo internacional, transitando entre o repertório clássico e o popular. Escreveu o livro "Flute" (série Yehudi Menuhin Music Guides) e mantém atividade pedagógica.',
+    importance:
+      'Mostrou como um flautista clássico pode se comunicar com públicos amplos, sem abrir mão da qualidade sonora.',
+    work: {
+      title: 'Flute (Yehudi Menuhin Music Guides)',
+      objective: 'Reflexões sobre o instrumento, a técnica e a vida musical a partir da experiência de um grande intérprete.',
+      how: 'Leia junto com o estudo prático; compare suas ideias com as de outros autores (Moyse, Debost, Wye).',
+      forWhom: 'Intermediário em diante.',
+      develops: 'Visão de carreira, som, perspectiva de intérprete.',
+      mistakes: 'Tomar a experiência de um intérprete como receita universal.',
+    },
+    journey: 'Uma parada no trecho da performance e da formação artística.',
+    legacy: 'Inspirou muitos estudantes a começarem a tocar flauta.',
+    sources: ['galway', 'grove'],
+  },
+  {
+    slug: 'debost',
+    name: 'Michel Debost',
+    years: 'Nascido em 1934',
+    nationality: 'Francês',
+    roles: ['interprete', 'pedagogo', 'autor'],
+    tagline: 'Pensar o estudo com clareza, de A a Z.',
+    stop: 'estudar',
+    bio:
+      'Debost foi primeiro flautista da Orquestre de Paris e professor do Conservatório de Paris; depois lecionou no Oberlin Conservatory, nos Estados Unidos. É autor de "The Simple Flute: From A to Z".',
+    importance:
+      'Seu livro organiza em verbetes temas como respiração, embocadura, articulação, vibrato, estudo e palco — com uma abordagem prática e direta.',
+    work: {
+      title: 'The Simple Flute: From A to Z (Oxford University Press, 2002)',
+      objective: 'Responder às grandes questões do estudo da flauta de forma objetiva, por temas.',
+      how: 'Use como livro de consulta: quando surgir um problema (ex.: vibrato, nervosismo, staccato), leia o verbete e leve uma ideia para o próximo estudo.',
+      forWhom: 'Intermediário em diante; professores.',
+      develops: 'Consciência sobre o próprio estudo e autonomia.',
+      mistakes: 'Ler muito e testar pouco.',
+    },
+    journey: 'Uma parada no capítulo "Como estudar": aprender a pensar o próprio processo.',
+    legacy: 'Referência contemporânea para alunos e professores.',
+    sources: ['debost', 'toff-flutebook'],
+  },
+  {
+    slug: 'wye',
+    name: 'Trevor Wye',
+    years: 'Nascido em 1935',
+    nationality: 'Inglês',
+    roles: ['pedagogo', 'autor', 'interprete'],
+    tagline: 'A organização sistemática do estudo moderno.',
+    stop: 'fundamentos',
+    bio:
+      'Flautista e professor inglês, Wye estudou, entre outros, com Marcel Moyse e Geoffrey Gilbert. Lecionou no Royal Northern College of Music e fundou uma escola internacional de flauta na Inglaterra. É autor de uma das séries pedagógicas mais difundidas do mundo.',
+    importance:
+      'Wye organizou o estudo por áreas — som, técnica, articulação, afinação e vibrato, respiração e escalas — com explicações claras e exercícios progressivos.',
+    work: {
+      title: 'Practice Book for the Flute (6 volumes)',
+      objective: 'Vol. 1 Tone · Vol. 2 Technique · Vol. 3 Articulation · Vol. 4 Intonation & Vibrato · Vol. 5 Breathing & Scales · Vol. 6 Advanced Practice.',
+      how: 'Não precisa ser lido em ordem. Identifique a área que precisa de atenção e escolha um exercício por vez para incluir na rotina. Leia as explicações — elas são parte do método.',
+      forWhom: 'Do fundamental ao profissional (o Vol. 6 é avançado). Para iniciantes, existe "A Beginner\'s Book for the Flute".',
+      develops: 'Som, técnica, articulação, afinação, vibrato, respiração, escalas — de forma organizada.',
+      mistakes: 'Tentar fazer todos os exercícios; pular as explicações; estudar sem gravação.',
+    },
+    journey: 'O mapa de estudo moderno: ajuda a montar sua rotina de fundamentos.',
+    legacy: 'Presente em praticamente todas as bibliotecas de flautistas.',
+    note: 'Datas biográficas atuais devem ser confirmadas em fonte atualizada.',
+    sources: ['wye', 'toff-flutebook'],
+  },
+];
+
+export const pedagogueBySlug = Object.fromEntries(pedagogues.map((p) => [p.slug, p]));

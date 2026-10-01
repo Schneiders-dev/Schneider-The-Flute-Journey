@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://schneiders-dev.github.io/Schneider---The-Flute-Journey/sitemap.xml
