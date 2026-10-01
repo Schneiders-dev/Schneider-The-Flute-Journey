@@ -1,15 +1,13 @@
 import { site, contact } from '../data/site.mjs';
 import { esc, icon } from './helpers.mjs';
+import { markSVG } from '../brand/flute-path.mjs';
 
 // Capítulos navegáveis (usados no menu, no indicador "Você está aqui" e no rodapé).
 export const navChapters = [
   { id: 'inicio', label: 'Início' },
   { id: 'mapa', label: 'O mapa da jornada' },
-  { id: 'primeiros-passos', label: 'Primeiros passos' },
-  { id: 'fundamentos', label: 'Fundamentos' },
-  { id: 'tecnica', label: 'Desenvolvimento técnico' },
-  { id: 'musical', label: 'Desenvolvimento musical' },
-  { id: 'horizonte', label: 'Intermediário → Formação' },
+  { id: 'jornada', label: 'As etapas da jornada' },
+  { id: 'pedagogos', label: 'Grandes nomes da flauta' },
   { id: 'historia', label: 'História da flauta' },
   { id: 'pilares', label: 'Os pilares do flautista' },
   { id: 'metodos', label: 'Biblioteca de métodos' },
@@ -17,16 +15,13 @@ export const navChapters = [
   { id: 'como-estudar', label: 'Como estudar' },
   { id: 'estudar-musica', label: 'Como estudar uma música' },
   { id: 'problemas', label: 'Problemas comuns' },
-  { id: 'ferramentas', label: 'Ferramentas do flautista' },
-  { id: 'professor', label: 'A importância do professor' },
-  { id: 'nivel', label: 'Descubra seu nível' },
+  { id: 'ferramentas', label: 'Ferramentas' },
+  { id: 'professor', label: 'O professor' },
   { id: 'trilhas', label: 'Trilhas de objetivo' },
   { id: 'checklist', label: 'Checklist' },
-  { id: 'seminario', label: 'Seminário de flauta' },
-  { id: 'schneider', label: 'Conheça Schneider' },
-  { id: 'filosofia', label: 'Filosofia' },
+  { id: 'seminario', label: 'Seminário' },
+  { id: 'schneider', label: 'Natan Schneider' },
   { id: 'aulas', label: 'Aulas' },
-  { id: 'fontes', label: 'Fontes e referências' },
 ];
 
 export function head({ title, description, path = '', prefix = '', jsonld = [], extraHead = '' }) {
@@ -51,10 +46,11 @@ export function head({ title, description, path = '', prefix = '', jsonld = [], 
 <meta property="og:image" content="${site.url}/assets/img/og.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="${prefix}assets/img/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap">
+<link rel="preload" href="${prefix}assets/fonts/cormorant-garamond-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="${prefix}assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="${prefix}assets/css/visuals.css">
 <link rel="stylesheet" href="${prefix}assets/css/main.css">
+<link rel="stylesheet" href="${prefix}assets/css/app.css">
 ${jsonld.map((j) => `<script type="application/ld+json">${JSON.stringify(j)}</script>`).join('\n')}
 ${extraHead}
 </head>`;
@@ -66,18 +62,16 @@ export function topbar(prefix = '') {
 <a class="skip" href="#conteudo">Pular para o conteúdo</a>
 <div class="progress" aria-hidden="true"><span></span></div>
 <header class="topbar">
-  <a class="brand" href="${prefix ? prefix + 'index.html' : '#inicio'}" aria-label="Schneider — The Flute Journey, início">
-    <span class="brand__name">SCHNEIDER</span><span class="brand__sub">The Flute Journey</span>
+  <a class="brand" href="${prefix ? prefix + 'index.html' : '#inicio'}" aria-label="The Flute Journey, início">
+    ${markSVG('brand__mark')}<span class="brand__txt"><span class="brand__name">The Flute Journey</span><span class="brand__sub">Natan Schneider</span></span>
   </a>
   <nav class="topbar__nav" aria-label="Atalhos">
     <a href="${H}#mapa">Mapa</a>
     <a href="${H}#metodos">Métodos</a>
-    <a href="${H}#nivel">Seu nível</a>
-    <a href="${H}#aulas" class="topbar__cta">Aulas</a>
+    <a href="${H}#jornada">Jornada</a>
+    <a href="${H}#aulas" class="topbar__cta" data-track="topbar-aulas">Aulas</a>
   </nav>
-  <button class="menu-btn" type="button" aria-haspopup="dialog" aria-controls="journey-index" data-open-index>
-    <span class="menu-btn__lines" aria-hidden="true"><i></i><i></i></span><span class="menu-btn__label">Jornada</span>
-  </button>
+  <button class="account-btn" type="button" data-account hidden><span class="account-btn__dot" aria-hidden="true"></span><span data-account-label>Entrar</span></button>
 </header>`;
 }
 
@@ -122,11 +116,11 @@ export function footer(prefix = '') {
   <div class="footer__cta">
     <p class="eyebrow">Continue caminhando</p>
     <p class="footer__line">Agora você sabe onde está na sua jornada.<br><em>Qual é o próximo passo?</em></p>
-    <a class="btn btn--gold" href="${H}#aulas">Começar aulas com Schneider ${icon('arrow')}</a>
+    <a class="btn btn--gold" href="${H}#aulas" data-track="footer-aulas">Começar aulas com Natan ${icon('arrow')}</a>
   </div>
   <div class="footer__grid">
     <div>
-      <p class="brand brand--footer"><span class="brand__name">SCHNEIDER</span><span class="brand__sub">The Flute Journey</span></p>
+      <p class="brand brand--footer">${markSVG('brand__mark')}<span class="brand__txt"><span class="brand__name">The Flute Journey</span><span class="brand__sub">Natan Schneider</span></span></p>
       <p class="footer__small">${esc(site.tagline)}</p>
       ${socials.length ? `<p class="footer__social">${socials.join(' · ')}</p>` : ''}
     </div>
@@ -141,12 +135,12 @@ export function footer(prefix = '') {
     <nav aria-label="Jornada">
       <p class="footer__h">Jornada</p>
       <a href="${H}#mapa">O mapa da jornada</a>
-      <a href="${H}#nivel">Descubra seu nível</a>
+      <a href="${H}#jornada">As etapas</a>
       <a href="${H}#trilhas">Trilhas de objetivo</a>
       <a href="${H}#seminario">Seminário de flauta</a>
       <a href="${H}#aulas">Aulas</a>
     </nav>
   </div>
-  <p class="footer__legal">© ${new Date().getFullYear()} Schneider — The Flute Journey. Conteúdo educacional. Partituras protegidas por direitos autorais não são distribuídas neste site. Informações históricas acompanhadas de fontes; quando há incerteza, ela é indicada.</p>
+  <p class="footer__legal">© ${new Date().getFullYear()} The Flute Journey · Natan Schneider. Conteúdo educacional. Partituras protegidas por direitos autorais não são distribuídas neste site. Informações históricas acompanhadas de fontes; quando há incerteza, ela é indicada.</p>
 </footer>`;
 }

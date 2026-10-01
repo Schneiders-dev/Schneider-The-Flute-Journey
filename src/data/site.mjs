@@ -96,7 +96,7 @@ export const seminars = [
     description:
       'Material de apoio do seminário. Os conteúdos apresentados ao vivo estão organizados aqui para você continuar estudando no seu ritmo.',
     materials: [
-      { type: 'exercicio', title: 'Rotina de sonoridade (long tones e harmônicos)', url: '#t-long-tones', description: 'O exercício-base apresentado no seminário, com variações por nível.' },
+      { type: 'exercicio', title: 'Rotina de sonoridade (long tones e harmônicos)', url: '#s-construcao-som', description: 'O exercício-base apresentado no seminário, com variações por nível.' },
       { type: 'exercicio', title: 'Rotinas de estudo de 15 a 120 minutos', url: '#como-estudar', description: 'Modelos de organização do tempo de prática.' },
       { type: 'material', title: 'Como estudar uma música — passo a passo', url: '#estudar-musica', description: 'A sequência completa, do primeiro contato à performance.' },
       { type: 'material', title: 'Biblioteca de métodos comentada', url: '#metodos', description: 'Para que serve cada método e como ele entra na sua jornada.' },
@@ -106,3 +106,26 @@ export const seminars = [
     ],
   },
 ];
+
+// Imagens trocáveis pelo editor (photo = número do acervo; src = arquivo enviado).
+export const media = {
+  aboutPortrait: { photo: 2 },
+  studyA: { photo: 4, caption: 'Partitura, estante e flauta: o estudo começa na organização.' },
+  studyB: { photo: 7, caption: 'A sala de ensaio é onde o plano vira hábito.' },
+  seminar: { photo: 12 },
+  contact: { photo: 5, caption: 'Cada aula parte de onde você está.' },
+  philosophy: { photo: 11 },
+  moment1: { photo: 15, caption: 'No palco' },
+  moment2: { photo: 9, caption: 'Na orquestra' },
+  moment3: { photo: 6, caption: 'Na sala de estudo' },
+  moment4: { photo: 17, caption: 'No dia a dia' },
+  pedagogues: { photo: 14 },
+};
+
+// Textos principais (editáveis).
+export const hero = {
+  eyebrow: 'Uma jornada pela flauta transversal',
+  title: 'The Flute Journey',
+  lead: 'Uma jornada pela arte de aprender, estudar e tocar flauta transversal.',
+  byline: 'por Natan Schneider',
+};

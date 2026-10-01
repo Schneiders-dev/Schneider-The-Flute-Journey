@@ -4,7 +4,7 @@
 import { mkdirSync, writeFileSync, rmSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { ROOT } from '../src/render/helpers.mjs';
-import { renderIndex } from '../src/render/index-page.mjs';
+import { renderIndex, guestCtx } from '../src/render/index-page.mjs';
 import { renderGuidePages } from '../src/render/guide-pages.mjs';
 import { site } from '../src/data/site.mjs';
 
@@ -16,7 +16,7 @@ const write = (rel, content) => {
 
 rmSync(join(ROOT, 'guia'), { recursive: true, force: true });
 
-write('index.html', renderIndex());
+write('index.html', renderIndex(guestCtx({ isStatic: true, appUrl: site.appUrl || '' })));
 const pages = renderGuidePages();
 pages.forEach((p) => write(p.path, p.html));
 

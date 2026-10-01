@@ -273,3 +273,19 @@ export const checklist = [
   { group: 'Técnica', items: ['Escalas maiores e menores', 'Escala cromática', 'Arpejos', 'Registro agudo', 'Articulação dupla', 'Articulação tripla'] },
   { group: 'Música', items: ['Vibrato', 'Fraseado', 'Estudos', 'Repertório', 'Tocar em público'] },
 ];
+
+// Técnicas (métodos) de estudo — como estudar com mais qualidade.
+export const studyTechniques = [
+  { id: 'ciclos', icon: 'timer', title: 'Ciclos de foco', short: '25 min de estudo + 5 min de pausa.', how: 'Estude em blocos curtos e intensos, com pausas reais (longe da flauta). A cada 4 ciclos, uma pausa maior. Use o cronômetro abaixo.' },
+  { id: 'lento', icon: 'turtle', title: 'Estudo lento', short: 'Devagar o suficiente para não errar.', how: 'Encontre o andamento em que a passagem sai perfeita 3 vezes seguidas. Só então avance.' },
+  { id: 'escada', icon: 'ladder', title: 'Escada do metrônomo', short: '+4 no metrônomo a cada acerto; −8 a cada erro.', how: 'Suba o andamento em pequenos passos. Errou? Volte dois degraus. A velocidade aparece sem tensão.' },
+  { id: 'tres-certas', icon: 'check', title: 'Regra das 3 certas', short: 'Três vezes certas seguidas antes de seguir.', how: 'Se errar na segunda ou terceira, o contador volta a zero. Repetir certo é o que fixa.' },
+  { id: 'blocos', icon: 'blocks', title: 'Blocos pequenos', short: 'Divida em trechos de 2 a 4 compassos.', how: 'Estude cada bloco separado, depois junte de dois em dois. O todo nasce das conexões.' },
+  { id: 'reverso', icon: 'reverse', title: 'Encadeamento reverso', short: 'Comece pelo final do trecho.', how: 'Toque o último compasso, depois os dois últimos, e assim por diante. Você sempre termina no que já sabe.' },
+  { id: 'ritmos', icon: 'rhythm', title: 'Variações rítmicas', short: 'Pontuado, invertido, em grupos.', how: 'Toque passagens rápidas em ritmos diferentes: longo-curto, curto-longo, grupos de 3 e 4. Os dedos ficam regulares.' },
+  { id: 'intercalado', icon: 'shuffle', title: 'Prática intercalada', short: 'Alterne assuntos dentro da sessão.', how: 'Em vez de 40 minutos no mesmo trecho, alterne blocos (som → escala → trecho → som). O cérebro retém mais.' },
+  { id: 'espacada', icon: 'calendar', title: 'Repetição espaçada', short: 'Revise em 1, 3 e 7 dias.', how: 'O que você aprendeu hoje volta amanhã, depois em 3 dias e em uma semana. Consolidar é evoluir.' },
+  { id: 'mental', icon: 'mind', title: 'Prática mental', short: 'Estude sem a flauta.', how: 'Ouça a música por dentro, imagine os dedos e a respiração. Funciona muito bem para memorização e palco.' },
+  { id: 'gravacao', icon: 'mic', title: 'Gravar e ouvir', short: 'O gravador é o professor sempre disponível.', how: 'Grave, espere alguns minutos e ouça como ouvinte. Anote um único ponto para corrigir.' },
+  { id: 'diario', icon: 'book', title: 'Diário de estudo', short: 'O que estudou, andamento e uma observação.', how: 'Três linhas por dia bastam. Em um mês você enxerga o próprio progresso.' },
+];

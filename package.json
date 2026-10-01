@@ -2,15 +2,15 @@
   "name": "schneider-the-flute-journey",
   "version": "1.0.0",
   "private": true,
-  "description": "SCHNEIDER — THE FLUTE JOURNEY: uma jornada interativa pela arte de aprender, estudar e tocar flauta transversal.",
+  "description": "The Flute Journey — plataforma de aprendizagem de flauta transversal de Natan Schneider.",
   "type": "module",
   "scripts": {
     "build": "node scripts/build.mjs",
-    "dev": "node scripts/build.mjs && npx --yes http-server -c-1 -p 8080 .",
-    "check": "node scripts/build.mjs && node scripts/check-links.mjs",
-    "start": "node scripts/serve.mjs"
+    "start": "node --disable-warning=ExperimentalWarning server/index.mjs",
+    "dev": "node scripts/build.mjs && DATA_DIR=.data ADMIN_EMAIL=admin@local ADMIN_PASSWORD=admin12345 node --disable-warning=ExperimentalWarning server/index.mjs",
+    "check": "node scripts/build.mjs && node scripts/check-links.mjs"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22.13"
   }
 }

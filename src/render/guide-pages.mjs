@@ -3,7 +3,6 @@ import { site, contact } from '../data/site.mjs';
 import { pedagogues } from '../data/pedagogues.mjs';
 import { methods, LEVELS, FOCUS } from '../data/methods.mjs';
 import { pillars, problems } from '../data/practice.mjs';
-import { chapters } from '../data/journey.mjs';
 import { esc, icon, list } from './helpers.mjs';
 import { stopHTML, problemBody, pillarBody, ribbonHTML, methodById, levelTags } from './components.mjs';
 import { head, topbar, journeyIndex, footer } from './layout.mjs';
@@ -123,31 +122,6 @@ export function renderGuidePages() {
   });
   out.push(indexPage('guia/pilares/index.html', 'Os oito pilares do flautista', 'Som, respiração, articulação, afinação, técnica, leitura, interpretação e repertório.', pil, pillars.map((p) => ({ href: `${p.id}.html`, title: p.title, text: p.short }))));
 
-  // Capítulos da jornada
-  const jor = { label: 'A jornada', path: 'guia/jornada/index.html' };
-  const chapterSeo = {
-    'primeiros-passos': 'Como aprender flauta transversal: primeiros passos',
-    fundamentos: 'Fundamentos da flauta: som, respiração, staccato, afinação',
-    tecnica: 'Técnica na flauta: escalas, duplo golpe de língua, agudos e velocidade',
-    musical: 'Interpretação na flauta: fraseado, vibrato, timbre e estilo',
-  };
-  chapters.forEach((c) => {
-    out.push(page({
-      path: `guia/jornada/${c.id}.html`, prefix: P2, ribbonIndex: c.ribbonIndex,
-      title: `${chapterSeo[c.id]} | The Flute Journey`,
-      description: `${c.lead} ${c.topics.map((t) => t.title).slice(0, 6).join(', ')}.`,
-      crumbs: [home, guides, jor, { label: c.kicker, path: `guia/jornada/${c.id}.html` }],
-      body: `<article class="guide__article">
-        <p class="eyebrow">Capítulo ${c.number} · ${esc(c.kicker)}</p>
-        <h1 class="display">${esc(chapterSeo[c.id])}</h1>
-        <p class="lead">${esc(c.lead)}</p>
-        ${c.topics.map((t) => `<section class="topic topic--flat" id="t-${t.id}"><h2>${esc(t.title)}</h2><p>${esc(t.text)}</p><p class="topic__practice"><span>Como praticar</span>${esc(t.practice)}</p></section>`).join('')}
-        <a class="link-more" href="${P2}index.html#${c.id}">Ver este capítulo na jornada interativa ${icon('arrow')}</a>
-      </article>`,
-    }));
-  });
-  out.push(indexPage('guia/jornada/index.html', 'A jornada do flautista', 'Primeiros passos, fundamentos, técnica e desenvolvimento musical na flauta transversal.', jor, chapters.map((c) => ({ href: `${c.id}.html`, title: chapterSeo[c.id], text: c.lead }))));
-
   // Índice geral
   out.push(page({
     path: 'guia/index.html', prefix: '../',
@@ -156,7 +130,6 @@ export function renderGuidePages() {
     crumbs: [home, guides],
     body: `<article class="guide__article"><p class="eyebrow">Guias</p><h1 class="display">Guias de estudo</h1>
       <ul class="glist">
-        <li><a href="jornada/index.html"><strong>A jornada do flautista</strong><span>Primeiros passos, fundamentos, técnica, interpretação.</span></a></li>
         <li><a href="problemas/index.html"><strong>Problemas comuns</strong><span>Causas e estratégias para as dificuldades mais frequentes.</span></a></li>
         <li><a href="metodos/index.html"><strong>Métodos para flauta</strong><span>Para que serve cada método e como estudá-lo.</span></a></li>
         <li><a href="pedagogos/index.html"><strong>Grandes pedagogos</strong><span>Quem construiu a tradição da flauta.</span></a></li>

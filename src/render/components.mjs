@@ -1,11 +1,12 @@
 import { esc, list, kf, portrait, icon } from './helpers.mjs';
 import { ROLE_LABELS } from '../data/pedagogues.mjs';
 import { references } from '../data/references.mjs';
-import { LEVELS, FOCUS, methods } from '../data/methods.mjs';
+import { LEVELS, FOCUS } from '../data/methods.mjs';
+import { content } from '../content.mjs';
 import { PERIODS, REP_LEVELS } from '../data/repertoire.mjs';
 import { ribbon } from '../data/journey.mjs';
 
-export const methodById = Object.fromEntries(methods.map((m) => [m.id, m]));
+export const methodById = new Proxy({}, { get: (_, id) => content.methods.find((m) => m.id === id) });
 
 export const fluteSVG = () => `
 <svg class="flute" viewBox="0 0 1200 96" role="img" aria-label="Ilustração de uma flauta transversal">
