@@ -7,7 +7,7 @@ export const site = {
   shortName: 'Schneider',
   tagline: 'Uma jornada pela arte de aprender, estudar e tocar flauta transversal.',
   // URL pública definitiva (usada em canonical, Open Graph e sitemap).
-  url: 'https://schneiders-dev.github.io/Schneider---The-Flute-Journey',
+  url: 'https://schneiders-dev.github.io/Schneider-The-Flute-Journey',
   locale: 'pt-BR',
   description:
     'Aulas de flauta transversal e um guia interativo para aprender, estudar e evoluir: primeiros sons, fundamentos, técnica, escalas, métodos, repertório, interpretação e os grandes pedagogos da flauta.',
