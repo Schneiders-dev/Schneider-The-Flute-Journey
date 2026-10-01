@@ -7,6 +7,10 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "dev": "node scripts/build.mjs && npx --yes http-server -c-1 -p 8080 .",
-    "check": "node scripts/build.mjs && node scripts/check-links.mjs"
+    "check": "node scripts/build.mjs && node scripts/check-links.mjs",
+    "start": "node scripts/serve.mjs"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }
